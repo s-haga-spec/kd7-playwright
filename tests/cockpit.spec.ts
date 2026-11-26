@@ -1,23 +1,24 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers/login';
+import { saveEvidence } from './helpers/evidence';
 
 test('指導コックピット表示確認', async ({ page }) => {
 
   await login(page);
-  
+
   await page.keyboard.press('Escape');
 
   await expect(
     page.getByRole('link', {
-      name: /^全て/
+      name: /^全て/,
     })
   ).toBeVisible();
 
   // ホーム全体
-  await page.screenshot({
-    path: 'evidence/00_home.png',
-    fullPage: false,
-  });
+  await saveEvidence(
+    page,
+    '00_home'
+  );
 });
 
 test('指導コックピットタブ切替確認', async ({ page }) => {
@@ -25,26 +26,27 @@ test('指導コックピットタブ切替確認', async ({ page }) => {
   await login(page);
 
   const allTab = page.getByRole('link', {
-    name: /^全て/
+    name: /^全て/,
   });
 
   const deptTab = page.getByRole('link', {
-    name: /^部門 \d+/
+    name: /^部門 \d+/,
   });
 
   const classTab = page.getByRole('link', {
-    name: /^クラス運用/
+    name: /^クラス運用/,
   });
 
   const approvalTab = page.getByRole('link', {
-    name: /^承認 \d+/
+    name: /^承認 \d+/,
   });
 
   // 全て
-  await page.screenshot({
-    path: 'evidence/01_cockpit_all.png',
-    fullPage: true,
-  });
+  await saveEvidence(
+    page,
+    '01_cockpit_all',
+    true
+  );
 
   // 部門
   await deptTab.click();
@@ -54,10 +56,11 @@ test('指導コックピットタブ切替確認', async ({ page }) => {
 
   await page.waitForTimeout(1000);
 
-  await page.screenshot({
-    path: 'evidence/02_cockpit_department.png',
-    fullPage: true,
-  });
+  await saveEvidence(
+    page,
+    '02_cockpit_department',
+    true
+  );
 
   // クラス運用
   await classTab.click();
@@ -67,10 +70,11 @@ test('指導コックピットタブ切替確認', async ({ page }) => {
 
   await page.waitForTimeout(1000);
 
-  await page.screenshot({
-    path: 'evidence/03_cockpit_class.png',
-    fullPage: true,
-  });
+  await saveEvidence(
+    page,
+    '03_cockpit_class',
+    true
+  );
 
   // 承認
   await approvalTab.click();
@@ -80,10 +84,11 @@ test('指導コックピットタブ切替確認', async ({ page }) => {
 
   await page.waitForTimeout(1000);
 
-  await page.screenshot({
-    path: 'evidence/04_cockpit_approval.png',
-    fullPage: true,
-  });
+  await saveEvidence(
+    page,
+    '04_cockpit_approval',
+    true
+  );
 
   // 全てに戻る
   await allTab.click();
@@ -93,9 +98,9 @@ test('指導コックピットタブ切替確認', async ({ page }) => {
 
   await page.waitForTimeout(1000);
 
-  await page.screenshot({
-    path: 'evidence/05_cockpit_all_return.png',
-    fullPage: true,
-  });
-
+  await saveEvidence(
+    page,
+    '05_cockpit_all_return',
+    true
+  );
 });
