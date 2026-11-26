@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers/login';
+import { saveEvidence } from './helpers/evidence';
 
 test('受講者別受講状況導線確認', async ({ page }) => {
 

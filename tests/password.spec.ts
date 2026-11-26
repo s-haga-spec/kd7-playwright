@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { ADMIN_BASE_URL } from './helpers/login';
+import { login } from './helpers/login';
+import { saveEvidence } from './helpers/evidence';
 
 test('P1-03_P1-04 パスワード変更からホーム遷移確認',
 async ({ page }) => {
@@ -53,9 +54,9 @@ async ({ page }) => {
     page.getByText('ダッシュボード')
   ).toBeVisible();
 
-  await page.screenshot({
-    path: 'evidence/P1-04_home_transition.png',
-    fullPage: false,
-  });
+  await saveEvidence(
+  page,
+  'P1-04_home_transition'
+);
 
 });

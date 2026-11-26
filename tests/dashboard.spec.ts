@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers/login';
+import { saveEvidence } from './helpers/evidence';
 
 test('ダッシュボード表示確認', async ({ page }) => {
 
@@ -9,9 +10,9 @@ test('ダッシュボード表示確認', async ({ page }) => {
     page.getByText('ダッシュボード')
   ).toBeVisible();
 
-  await page.screenshot({
-    path: 'evidence/10_dashboard_home.png',
-    fullPage: false,
-  });
+  await saveEvidence(
+    page,
+    '10_dashboard_home'
+  );
 
 });
