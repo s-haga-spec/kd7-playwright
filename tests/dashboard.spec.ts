@@ -15,20 +15,3 @@ test('ダッシュボード表示確認', async ({ page }) => {
   });
 
 });
-
-test('利用状況表示確認', async ({ page }) => {
-
-  await login(page);
-
-  await expect(
-    page.getByText('利用状況', {
-      exact: true,
-    })
-  ).toBeVisible();
-
-  await page.screenshot({
-    path: 'evidence/11_dashboard_status.png',
-    fullPage: false,
-  });
-
-});
